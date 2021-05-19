@@ -80,16 +80,29 @@ public class Main{
 
 			System.out.println("Sparse Matrix check:");
 
-			SparseMatrix t1 = new SparseMatrix(1000, 1000);
-			t1.fill(500);
-			System.out.println("t1: \n" + t1);
 			
+			
+			SparseMatrix test = new SparseMatrix(50, 50);
+			test.fill(2);
+			System.out.println("test: \n" + test);
+
+			SparseMatrix t1 = new SparseMatrix(3, 3);
+			t1.fill(2);
+			System.out.println("t1: \n" + t1);
+
 			SparseMatrix t2 = new SparseMatrix(3, 3);
-			t2.fill(3);
+			t2.fill(2);
 			System.out.println("t2: \n" + t2);
+
 			System.out.println("t1+t2: \n" + t1.sum(t2));
 			System.out.println("t1*t2: \n" + t1.product(t2));
 			System.out.println("t2*t1: \n" + t2.product(t1));
+
+			System.out.println("m:\n"+m);
+			
+			System.out.println("m+t2: \n" + m.sum(t2));
+			System.out.println("m*t2: \n" + m.product(t2));
+			System.out.println("t2*m: \n" + t2.product(m));
 			
 		}
 		catch(MatrixException error){

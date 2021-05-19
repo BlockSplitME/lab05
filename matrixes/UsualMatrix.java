@@ -61,7 +61,7 @@ public class UsualMatrix implements IMatrix{
 		}
 	}
 
-
+	@ Override
 	public UsualMatrix sum(IMatrix tmp){	
 			if ((this.colSize == tmp.getColumnSize())&&(this.rowSize == tmp.getRowSize())){
 				UsualMatrix cur = new UsualMatrix(this.colSize, this.rowSize);
@@ -74,7 +74,7 @@ public class UsualMatrix implements IMatrix{
 			} else { MatrixException e = new MatrixException("Matrix sizes are different"); throw e; }
 	}
 
-	
+	@ Override
 	public UsualMatrix product(IMatrix tmp){
 			if (this.rowSize == tmp.getColumnSize()){
 				UsualMatrix cur = new UsualMatrix(this.colSize, tmp.getRowSize());

@@ -38,7 +38,7 @@ public class SparseMatrix implements IMatrix{
 	public final int getRowSize(){
 		return this.rowSize;
 	}
-
+	@ Override
 	public final void setElement(int curColumn, int curRow, int curValue){
 		if((curRow >= this.rowSize || curRow < 0) || (curColumn < 0 || curColumn >= this.colSize)){
 			MatrixException e = new MatrixException("Memory access error");
@@ -53,18 +53,18 @@ public class SparseMatrix implements IMatrix{
 	    ListIterator<NonZeroElement> iter = this.matrix.listIterator();
 	    while (iter.hasNext()) {
 	      NonZeroElement element = iter.next();
-	        if(cur.value == element.value && cur.row == element.row && cur.column == element.column){ //if such en element is sibling
+	        if(cur.value == element.value && cur.row == element.row && cur.column == element.column){ 
 	        	return;
-	        } else if(cur.value != element.value && cur.row == element.row && cur.column == element.column){ //if such position exsist
+	        } else if(cur.value != element.value && cur.row == element.row && cur.column == element.column){ 
 	        	iter.set(cur);
 	        	return;
-	        } else if(cur.row < element.row && cur.column == element.column){ // if no such position in this row, but there have higher row position
+	        } else if(cur.row < element.row && cur.column == element.column){
 	        	iter.previous();
 	        	iter.add(cur);
 	        	iter.next();
 	        	return;
-	        } else if(cur.column < element.column){ // if no such position in this row, but there have not higher row position,
-	        	iter.previous();                    // but have higher column position (last element of cur row)
+	        } else if(cur.column < element.column){ 
+	        	iter.previous();                    
 	        	iter.add(cur);
 	        	iter.next();
 	        	if(this.rowSize < curRow+1){
@@ -76,8 +76,8 @@ public class SparseMatrix implements IMatrix{
 	    this.matrix.addLast(cur);
 		return;
 	}
-
-	public int getElement(int col, int row){
+	@ Override
+	public final int getElement(int col, int row){
 		if((row < this.rowSize && row >= 0) || (col >= 0 && col < this.colSize)){
 			for(NonZeroElement element : this.matrix){
 				if(element.column > col){
@@ -116,7 +116,7 @@ public class SparseMatrix implements IMatrix{
 			}
 		}
 	}
-
+	@ Override
 	public SparseMatrix sum(IMatrix tmp){
 		if((this.colSize == tmp.getColumnSize()) && (this.rowSize == tmp.getRowSize())){
 			SparseMatrix cur = new SparseMatrix(this.colSize, this.rowSize );
@@ -127,7 +127,7 @@ public class SparseMatrix implements IMatrix{
 	    	}
 	    	for (int i = 0; i < this.colSize; i++) {
 	    		for (int j = 0; j < this.rowSize; j++) {
-	    			if(i == element.column && j == element.row){ //finding elements != 0
+	    			if(i == element.column && j == element.row){ 
 	    				cur.setElement(i, j, (tmp.getElement(i, j) + element.value) );
 	    				if(iter.hasNext()){
 	    					element = iter.next();
@@ -140,6 +140,7 @@ public class SparseMatrix implements IMatrix{
 	    	return cur;
 		} else { MatrixException e = new MatrixException("Memory access error"); throw e; }
 	}
+	@ Override
 	public SparseMatrix product(IMatrix tmp){
 		if(this.getRowSize() == tmp.getColumnSize()){
 
@@ -157,7 +158,7 @@ public class SparseMatrix implements IMatrix{
 	}
 	
 
-
+	@ Override
 	public String toString(){
 		StringBuilder str = new StringBuilder(); 
 	    Iterator<NonZeroElement> iter = this.matrix.iterator();
@@ -181,7 +182,7 @@ public class SparseMatrix implements IMatrix{
 	    }
 	    return str.toString(); 
 	}
-
+	@ Override
 	public boolean equals(Object tmp){
 		if(tmp instanceof SparseMatrix)
 	        return ((this.toString()).equals(tmp.toString())); 

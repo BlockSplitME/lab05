@@ -12,7 +12,7 @@ public class SquareMatrix extends UsualMatrix implements IMatrix{
 		return colSize;
 	}
 	@ Override
-	public SquareMatrix sum(IMatrix tmp){
+	public final SquareMatrix sum(IMatrix tmp){
 		if ((this.colSize == tmp.getColumnSize())&&(this.rowSize == tmp.getRowSize())){
 				SquareMatrix cur = new SquareMatrix(this.getSize());
 				for(int i = 0; i < this.getSize(); i++){
@@ -24,7 +24,7 @@ public class SquareMatrix extends UsualMatrix implements IMatrix{
 			} else { MatrixException e = new MatrixException("Matrix sizes are different"); throw e; }
 	}
 	@ Override
-	public SquareMatrix product( IMatrix tmp){	
+	public final SquareMatrix product( IMatrix tmp){	
 			if (this.rowSize == tmp.getColumnSize()){
 				SquareMatrix cur = new SquareMatrix(this.getSize());
 				for(int i = 0; i < this.getColumnSize(); i++){
